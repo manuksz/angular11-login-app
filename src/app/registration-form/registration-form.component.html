@@ -1,32 +1,77 @@
 <mat-card id="card" style="text-align: center;">
   <mat-card-content>
     Name <mat-form-field>
-      <input matInput placeholder="First Name">
+      <input matInput placeholder="First Name" [formControl]="firstName" required>
+      <mat-error *ngIf="firstName.errors.required">{{printErrorMessage()}}</mat-error>
+      <mat-error *ngIf="firstName.errors.pattern">First Name should only have alphabets and less than 20 characters
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field>
-      <input matInput placeholder="Last Name">
+      <input matInput placeholder="Last Name" [formControl]="lastName" required>
+      <mat-error *ngIf="lastName.invalid">{{printErrorMessage()}}</mat-error>
     </mat-form-field><br/>
-    Age <mat-form-field>
-      <input matInput placeholder="age">
+
+    Age <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="150"></mat-slider><br/>
+
+    Email <mat-form-field appearance="fill">
+      <input matInput placeholder="email" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{emailErrorMessage()}}</mat-error>
     </mat-form-field><br/>
-    Email <mat-form-field>
-      <input matInput placeholder="email">
-    </mat-form-field><br/>
+
     Tel <mat-form-field>
-      <input matInput placeholder="phone number">
+      <input matInput placeholder="Phone number" [formControl]="mobileNumber" required>
+      <mat-error *ngIf="mobileNumber.errors.required">{{printErrorMessage()}}</mat-error>
+      <mat-error *ngIf="mobileNumber.errors.pattern">Please enter 10 digit Phone Number.</mat-error>
     </mat-form-field><br/>
+
     State <mat-form-field>
-      <input matInput placeholder="state">
+      <mat-select [formControl]="stateName" required>
+        <mat-option *ngFor="let state of states" [value]="state.value">
+          {{state.viewValue}} </mat-option>
+      </mat-select>
+      <mat-error *ngIf="stateName.invalid">{{printErrorMessage()}}</mat-error>
     </mat-form-field><br/>
+
     Country <mat-form-field>
-      <input matInput placeholder="county">
+      <mat-select [formControl]="countryName" required>
+        <mat-option *ngFor="let country of countries" [value]="country.value">
+          {{country.viewValue}} </mat-option>
+      </mat-select>
+      <mat-error *ngIf="countryName.invalid">{{printErrorMessage()}}</mat-error>
     </mat-form-field><br/>
+
     Address <mat-form-field>
       <input matInput placeholder="address">
     </mat-form-field><br/>
+
     Interests <mat-form-field>
       <input matInput placeholder="interests">
     </mat-form-field><br/>
+    <!--
+    <mat-form-field class="example-chip-list">
+      <mat-label>Favorite Fruits</mat-label>
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
+          (removed)="remove(fruit)">
+          {{fruit}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+      placeholder="New fruit..."
+      #fruitInput
+      [formControl]="fruitCtrl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+          {{fruit}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
     <button mat-raised-button color="primary" style="margin-right:5px;">Submit</button>
-
+-->
   </mat-card-content>
