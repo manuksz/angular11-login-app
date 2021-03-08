@@ -13,7 +13,7 @@ mat-slider {
 #uploadButton {
   position: fixed;
   left: 27.5%;
-  top: 10%;
+  top: 11%;
   height: 150px;
   width: 150px;
   border-radius: 0px;
@@ -48,4 +48,9 @@ mat-slider {
   position: fixed;
   margin-left: 26%;
   margin-top: 17%;
+}
+
+.submit-button {
+  margin-left: 5%;
+  margin-top: 1%;
 }

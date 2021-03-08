@@ -18,6 +18,7 @@ import { StartUpPageComponent } from "./start-up-page/start-up-page.component";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { DetailsFormComponent } from './details-form/details-form.component';
+import { UserDetailsService } from './user-details.service';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { DetailsFormComponent } from './details-form/details-form.component';
     MatCheckboxModule
   ],
   declarations: [AppComponent, RegistrationFormComponent, StartUpPageComponent, DetailsFormComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [UserDetailsService]
 })
 export class AppModule {}

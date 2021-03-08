@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDetailsService } from '../user-details.service';
 
 @Component({
   selector: 'app-details-form',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userService: UserDetailsService) { }
 
   ngOnInit() {
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { FormControl, Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
+import { UserDetailsService } from '../user-details.service';
 
 /*import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import {
@@ -18,7 +19,7 @@ import { map, startWith } from "rxjs/operators";*/
 })
 export class RegistrationFormComponent implements OnInit {
   register_form: FormGroup;
-  constructor(private router: Router, private formBuilder: FormBuilder) {}
+  constructor(private router: Router, private formBuilder: FormBuilder, public userService: UserDetailsService) {}
 
 
   ngOnInit() {
@@ -92,6 +93,7 @@ export class RegistrationFormComponent implements OnInit {
     if (this.register_form.valid) {
       // You will get form value if your form is valid
       alert("Valid");
+      this.userService.sendUserDetails("MANU");
       this.router.navigate([`${pageName}`]);
     }
   }
