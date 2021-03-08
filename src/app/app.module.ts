@@ -9,6 +9,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSliderModule } from "@angular/material/slider";
 import { MatChipsModule } from "@angular/material/chips";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppComponent } from "./app.component";
 import { RegistrationFormComponent } from "./registration-form/registration-form.component";
@@ -29,7 +30,8 @@ import { AppRoutingModule } from "./app-routing.module";
     MatSelectModule,
     MatSliderModule,
     BrowserAnimationsModule,
-    MatChipsModule
+    MatChipsModule,
+    MatToolbarModule
   ],
   declarations: [AppComponent, RegistrationFormComponent, StartUpPageComponent],
   bootstrap: [AppComponent]
