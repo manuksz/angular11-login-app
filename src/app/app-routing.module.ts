@@ -7,7 +7,7 @@ import { DetailsFormComponent } from "./details-form/details-form.component";
 
 const routes: Routes = [
   { path: "login", component: StartUpPageComponent },
-  { path: "details", component: StartUpPageComponent },
+  { path: "detail", component: DetailsFormComponent },
   { path: "register", component: RegistrationFormComponent },
   { path: "", component: StartUpPageComponent }
 ];

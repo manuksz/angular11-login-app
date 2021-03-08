@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
+import { FormControl, Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 
 /*import { COMMA, ENTER } from "@angular/cdk/keycodes";
@@ -17,24 +17,26 @@ import { map, startWith } from "rxjs/operators";*/
   styleUrls: ["./registration-form.component.css"]
 })
 export class RegistrationFormComponent implements OnInit {
+  register_form: FormGroup;
+  constructor(private router: Router, private formBuilder: FormBuilder) {}
 
 
-  ngOnInit() {}
-  
-  constructor(private router: Router) {}
-
-  email = new FormControl("", [Validators.required, Validators.email]);
-  firstName = new FormControl("", [
-    Validators.required,
-    Validators.pattern("^[A-Za-z]{1,20}$")
-  ]);
-  lastName = new FormControl("", [Validators.required]);
-  stateName = new FormControl("", [Validators.required]);
-  countryName = new FormControl("", [Validators.required]);
-  mobileNumber = new FormControl("", [
-    Validators.required,
-    Validators.pattern("^[0-9]{10}$")
-  ]);
+  ngOnInit() {
+    this.register_form = this.formBuilder.group({
+    email: new FormControl("", [Validators.required, Validators.email]),
+    firstName: new FormControl("", [
+      Validators.required,
+      Validators.pattern("^[A-Za-z]{1,20}$")
+    ]),
+    lastName: new FormControl("", [Validators.required]),
+    stateName: new FormControl("", [Validators.required]),
+    countryName: new FormControl("", [Validators.required]),
+    mobileNumber: new FormControl("", [
+      Validators.required,
+      Validators.pattern("^[0-9]{10}$")
+    ])
+    });
+  }
 
   states = [
     { value: "s1", viewValue: "Alabama" },
@@ -51,7 +53,7 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   emailErrorMessage() {
-    return this.email.hasError("email") ? "Not a valid email" : "";
+    return "Not a valid email";
   }
 
   formatLabel(value: number) {
@@ -87,8 +89,11 @@ export class RegistrationFormComponent implements OnInit {
   }
 
     submitUser(pageName: string): void {
-    alert("Click");
-    this.router.navigate([`${pageName}`]);
+    if (this.register_form.valid) {
+      // You will get form value if your form is valid
+      alert("Valid");
+      this.router.navigate([`${pageName}`]);
+    }
   }
 
   /*

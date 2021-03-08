@@ -14,61 +14,64 @@
 
 <mat-card id="card" style="text-align: center;">
   <mat-card-content>
-    Name <mat-form-field>
-      <input matInput placeholder="First Name" [formControl]="firstName" required>
-      <mat-error *ngIf="firstName.errors?.required">{{printErrorMessage()}}</mat-error>
-      <mat-error *ngIf="firstName.errors?.pattern">First Name should only have alphabets and less than 20 characters
-      </mat-error>
-    </mat-form-field> .
+    <div [formGroup]="register_form">
+      Name <mat-form-field>
+        <input matInput placeholder="First Name" formControlName="firstName" required>
+        <mat-error *ngIf="register_form.controls['firstName'].errors?.required">{{printErrorMessage()}}</mat-error>
+        <mat-error *ngIf="register_form.controls['firstName'].errors?.pattern">First Name should only have alphabets and
+          less than 20 characters
+        </mat-error>
+      </mat-form-field> .
 
-    <mat-form-field>
-      <input matInput placeholder="Last Name" [formControl]="lastName" required>
-      <mat-error *ngIf="lastName?.invalid">{{printErrorMessage()}}</mat-error>
-    </mat-form-field><br/>
+      <mat-form-field>
+        <input matInput placeholder="Last Name" formControlName="lastName" required>
+        <mat-error *ngIf="register_form.controls['lastName']?.invalid">{{printErrorMessage()}}</mat-error>
+      </mat-form-field><br/>
 
     Age <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="13" min="1" max="60" color="primary">
-    </mat-slider><br/>
+      </mat-slider><br/>
 
     Email <mat-form-field appearance="fill">
-      <input matInput placeholder="email" [formControl]="email" required>
-      <mat-error *ngIf="email?.invalid">{{emailErrorMessage()}}</mat-error>
-    </mat-form-field><br/>
+        <input matInput placeholder="email" formControlName="email" required>
+        <mat-error *ngIf="register_form.controls['email']?.invalid">{{emailErrorMessage()}}</mat-error>
+      </mat-form-field><br/>
 
     Tel <mat-form-field>
-      <input matInput placeholder="Phone number" [formControl]="mobileNumber" required>
-      <mat-error *ngIf="mobileNumber.errors?.required">{{printErrorMessage()}}</mat-error>
-      <mat-error *ngIf="mobileNumber.errors?.pattern">Please enter 10 digit Phone Number.</mat-error>
-    </mat-form-field><br/>
+        <input matInput placeholder="Phone number" formControlName="mobileNumber" required>
+        <mat-error *ngIf="register_form.controls['mobileNumber'].errors?.required">{{printErrorMessage()}}</mat-error>
+        <mat-error *ngIf="register_form.controls['mobileNumber'].errors?.pattern">Please enter 10 digit Phone Number.
+        </mat-error>
+      </mat-form-field><br/>
 
     State <mat-form-field>
-      <mat-select [formControl]="stateName" required>
-        <mat-option *ngFor="let state of states" [value]="state.value">
-          {{state.viewValue}} </mat-option>
-      </mat-select>
-      <mat-error *ngIf="stateName?.invalid">{{printErrorMessage()}}</mat-error>
-    </mat-form-field><br/>
+        <mat-select formControlName="stateName" required>
+          <mat-option *ngFor="let state of states" [value]="state.value">
+            {{state.viewValue}} </mat-option>
+        </mat-select>
+        <mat-error *ngIf="register_form.controls['stateName']?.invalid">{{printErrorMessage()}}</mat-error>
+      </mat-form-field><br/>
 
     Country <mat-form-field>
-      <mat-select [formControl]="countryName" required>
-        <mat-option *ngFor="let country of countries" [value]="country.value">
-          {{country.viewValue}} </mat-option>
-      </mat-select>
-      <mat-error *ngIf="countryName?.invalid">{{printErrorMessage()}}</mat-error>
-    </mat-form-field><br/>
+        <mat-select formControlName="countryName" required>
+          <mat-option *ngFor="let country of countries" [value]="country.value">
+            {{country.viewValue}} </mat-option>
+        </mat-select>
+        <mat-error *ngIf="register_form.controls['countryName']?.invalid">{{printErrorMessage()}}</mat-error>
+      </mat-form-field><br/>
 
     Address <mat-form-field>
-      <input matInput placeholder="address">
-    </mat-form-field><br/>
+        <input matInput placeholder="address">
+      </mat-form-field><br/>
 
     Interests <mat-form-field>
-      <input matInput placeholder="interests">
-    </mat-form-field><br/>
+        <input matInput placeholder="interests">
+      </mat-form-field><br/>
 
-    <mat-checkbox class="example-margin" color="primary"> Subscribe to the news letter </mat-checkbox>
+      <mat-checkbox class="example-margin" color="primary"> Subscribe to the news letter </mat-checkbox>
 
-    <button mat-raised-button class="submit-button" color="primary"
-  (click)="submitUser('login')">Submit</button>
-    <!--
+      <button mat-raised-button class="submit-button" color="primary"
+  (click)="submitUser('detail')">Submit</button>
+      <!--
     <mat-form-field class="example-chip-list">
       <mat-label>Favorite Fruits</mat-label>
       <mat-chip-list #chipList aria-label="Fruit selection">
@@ -80,7 +83,7 @@
         <input
       placeholder="New fruit..."
       #fruitInput
-      [formControl]="fruitCtrl"
+      formControlName="fruitCtrl"
       [matAutocomplete]="auto"
       [matChipInputFor]="chipList"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -94,4 +97,5 @@
     </mat-form-field>
     <button mat-raised-button color="primary" style="margin-right:5px;">Submit</button>
 -->
+    </div>
   </mat-card-content>
