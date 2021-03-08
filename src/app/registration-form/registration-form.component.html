@@ -27,8 +27,8 @@
         <input matInput placeholder="Last Name" formControlName="lastName" required>
         <mat-error *ngIf="register_form.controls['lastName']?.invalid">{{printErrorMessage()}}</mat-error>
       </mat-form-field><br/>
-
-    Age <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="13" max="60" color="primary">
+    Age <mat-slider #slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="13" max="60" color="primary"
+        formControlName="ageName">
       </mat-slider><br/>
       <mat-label id="ageBand">13-19 . 20-29 . 30-45 . 45 & Above</mat-label><br/>
 
@@ -46,7 +46,7 @@
 
     State <mat-form-field>
         <mat-select formControlName="stateName" required>
-          <mat-option *ngFor="let state of states" [value]="state.value">
+          <mat-option *ngFor="let state of states" [value]="state.value" formControlName="stateName">
             {{state.viewValue}} </mat-option>
         </mat-select>
         <mat-error *ngIf="register_form.controls['stateName']?.invalid">{{printErrorMessage()}}</mat-error>
@@ -65,7 +65,7 @@
       </mat-form-field><br/>
 
     Interests <mat-form-field>
-        <input matInput placeholder="interests">
+        <input matInput placeholder="interests" formControlName="hobbyName" >
       </mat-form-field><br/>
 
       <mat-checkbox class="example-margin" color="primary" [ngModel]="isChecked" (change)="isChecked = !isChecked">
@@ -73,31 +73,5 @@
 
       <button mat-raised-button class="submit-button" color="primary"
   (click)="submitUser('detail')">Submit</button>
-      <!--
-    <mat-form-field class="example-chip-list">
-      <mat-label>Favorite Fruits</mat-label>
-      <mat-chip-list #chipList aria-label="Fruit selection">
-        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
-          (removed)="remove(fruit)">
-          {{fruit}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-        <input
-      placeholder="New fruit..."
-      #fruitInput
-      formControlName="fruitCtrl"
-      [matAutocomplete]="auto"
-      [matChipInputFor]="chipList"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      (matChipInputTokenEnd)="add($event)">
-      </mat-chip-list>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-          {{fruit}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button mat-raised-button color="primary" style="margin-right:5px;">Submit</button>
--->
     </div>
   </mat-card-content>

@@ -9,6 +9,6 @@
 <div class="vertical-line"></div>
 
 <div id="infoScreen">
-  <p>{{userService.userDetails}}</p>
+  <div  [innerHTML]="userService.userDetails"></div>
   <button id="agreeButton" mat-raised-button class="register-button" color="primary">Agree</button>
 </div>

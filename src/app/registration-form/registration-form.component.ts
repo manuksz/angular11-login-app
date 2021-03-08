@@ -8,15 +8,6 @@ import {
 import { Router } from "@angular/router";
 import { UserDetailsService } from "../user-details.service";
 
-/*import { COMMA, ENTER } from "@angular/cdk/keycodes";
-import {
-  MatAutocompleteSelectedEvent,
-  MatAutocomplete
-} from "@angular/material/autocomplete";
-import { MatChipInputEvent } from "@angular/material/chips";
-import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";*/
-
 @Component({
   selector: "app-registration-form",
   templateUrl: "./registration-form.component.html",
@@ -39,6 +30,8 @@ export class RegistrationFormComponent implements OnInit {
         Validators.required,
         Validators.pattern("^[A-Za-z]{1,20}$")
       ]),
+      ageName: new FormControl(),
+      hobbyName: new FormControl(),
       lastName: new FormControl("", [Validators.required]),
       stateName: new FormControl("", [Validators.required]),
       countryName: new FormControl("", [Validators.required]),
@@ -50,11 +43,11 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   states = [
-    { value: "s1", viewValue: "Alabama" },
-    { value: "s2", viewValue: "Alaska" },
-    { value: "s3", viewValue: "Arizona" },
-    { value: "s4", viewValue: "Arkansas" },
-    { value: "s5", viewValue: "California" }
+    { value: "Alabama", viewValue: "Alabama" },
+    { value: "Alaska", viewValue: "Alaska" },
+    { value: "Arizona", viewValue: "Arizona" },
+    { value: "Arkansas", viewValue: "Arkansas" },
+    { value: "California", viewValue: "California" }
   ];
 
   countries = [{ value: "c1", viewValue: "United States" }];
@@ -73,6 +66,8 @@ export class RegistrationFormComponent implements OnInit {
 
   @ViewChild("fileInput") fileInput: ElementRef;
   fileName = "";
+
+  ageName = "";
 
   uploadProfilePicture(imgFile: any) {
     if (imgFile.target.files && imgFile.target.files[0]) {
@@ -101,20 +96,33 @@ export class RegistrationFormComponent implements OnInit {
 
   submitUser(pageName: string): void {
     if (this.register_form.valid) {
+      //calculate the age band of the user
+      var ageBand = 0;
+      if (this.register_form.controls["ageName"].value >= 45) {
+        ageBand = 45;
+      } else if (this.register_form.controls["ageName"].value >= 30) {
+        ageBand = 30;
+      } else if (this.register_form.controls["ageName"].value >= 20) {
+        ageBand = 20;
+      } else if (this.register_form.controls["ageName"].value >= 13) {
+        ageBand = 13;
+      }
+
       // if the form data is valid
       var userString =
-        "I am " +
+        "I am <b>" +
         this.register_form.controls["firstName"].value +
         " " +
         this.register_form.controls["lastName"].value +
-        " and I am above " +
-        "age" +
-        " years and you can send your emails to " +
+        " </b> and I am <b>above " +
+        ageBand +
+        " years</b> and you can send your emails to <b>" +
         this.register_form.controls["email"].value +
-        ". I lives in the state of " +
-        "state" +
-        ". I like to " +
-        "hobbies";
+        "</b>. I lives in the state of " +
+        this.register_form.controls["stateName"].value +
+        ". I like to <b>" +
+        this.register_form.controls["hobbyName"].value +
+        "</b>";
 
       // if subscribed for news letters
       if (this.isChecked) {
@@ -129,65 +137,4 @@ export class RegistrationFormComponent implements OnInit {
       this.router.navigate([`${pageName}`]);
     }
   }
-
-  /*
-  visible = true;
-  selectable = true;
-  removable = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filteredFruits: Observable<string[]>;
-  fruits: string[] = ["Lemon"];
-  allFruits: string[] = ["Apple", "Lemon", "Lime", "Orange", "Strawberry"];
-
-  @ViewChild("fruitInput") fruitInput: ElementRef<HTMLInputElement>;
-  @ViewChild("auto") matAutocomplete: MatAutocomplete;
-
-  constructor() {
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) =>
-        fruit ? this._filter(fruit) : this.allFruits.slice()
-      )
-    );
-  }
-
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our fruit
-    if ((value || "").trim()) {
-      this.fruits.push(value.trim());
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = "";
-    }
-
-    this.fruitCtrl.setValue(null);
-  }
-
-  remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = "";
-    this.fruitCtrl.setValue(null);
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allFruits.filter(
-      fruit => fruit.toLowerCase().indexOf(filterValue) === 0
-    );
-  }*/
 }
