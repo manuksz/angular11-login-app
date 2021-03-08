@@ -10,12 +10,14 @@ import { MatSliderModule } from "@angular/material/slider";
 import { MatChipsModule } from "@angular/material/chips";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { AppComponent } from "./app.component";
 import { RegistrationFormComponent } from "./registration-form/registration-form.component";
 import { StartUpPageComponent } from "./start-up-page/start-up-page.component";
 
 import { AppRoutingModule } from "./app-routing.module";
+import { DetailsFormComponent } from './details-form/details-form.component';
 
 @NgModule({
   imports: [
@@ -31,9 +33,10 @@ import { AppRoutingModule } from "./app-routing.module";
     MatSliderModule,
     BrowserAnimationsModule,
     MatChipsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCheckboxModule
   ],
-  declarations: [AppComponent, RegistrationFormComponent, StartUpPageComponent],
+  declarations: [AppComponent, RegistrationFormComponent, StartUpPageComponent, DetailsFormComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

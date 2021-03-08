@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 /*import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import {
@@ -16,7 +17,11 @@ import { map, startWith } from "rxjs/operators";*/
   styleUrls: ["./registration-form.component.css"]
 })
 export class RegistrationFormComponent implements OnInit {
+
+
   ngOnInit() {}
+  
+  constructor(private router: Router) {}
 
   email = new FormControl("", [Validators.required, Validators.email]);
   firstName = new FormControl("", [
@@ -79,6 +84,11 @@ export class RegistrationFormComponent implements OnInit {
     } else {
       this.fileName = "";
     }
+  }
+
+    submitUser(pageName: string): void {
+    alert("Click");
+    this.router.navigate([`${pageName}`]);
   }
 
   /*
