@@ -81,13 +81,13 @@ export class RegistrationFormComponent implements OnInit {
         this.fileName += file.name + " - ";
       });
 
-      // HTML5 FileReader API
+      // read the file from system
       let reader = new FileReader();
       reader.onload = (e: any) => {
         let image = new Image();
         image.src = e.target.result;
         image.onload = rs => {
-          this.imageURL = e.target.result; 
+          this.imageURL = e.target.result;
         };
       };
       reader.readAsDataURL(imgFile.target.files[0]);
@@ -100,11 +100,7 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   submitUser(pageName: string): void {
-
-
- 
-    
-    //if (this.register_form.valid) {
+    if (this.register_form.valid) {
       // if the form data is valid
       var userString =
         "I am " +
@@ -115,7 +111,7 @@ export class RegistrationFormComponent implements OnInit {
         "age" +
         " years and you can send your emails to " +
         this.register_form.controls["email"].value +
-        "I lives in the state of " +
+        ". I lives in the state of " +
         "state" +
         ". I like to " +
         "hobbies";
@@ -131,10 +127,8 @@ export class RegistrationFormComponent implements OnInit {
       this.userService.sendUserDetails(userString);
       this.userService.sendUserPicture(this.imageURL);
       this.router.navigate([`${pageName}`]);
-    //}
+    }
   }
-
-
 
   /*
   visible = true;

@@ -1,0 +1,40 @@
+#imageScreen {
+  position: fixed;
+  height: 500px;
+  margin-left: 27%;
+  margin-top: 3%;
+}
+
+#editLinks {
+  position: fixed;
+  margin-top: 12%;
+    margin-left:3%;
+}
+
+#infoScreen {
+  position: fixed;
+  height: 200px;
+  width:500px;
+  text-align: center;
+  margin-left: 42%;
+  margin-top: 3%;
+}
+
+.vertical-line {
+  position: fixed;
+  border-left: 3px solid rgb(111, 46, 155);
+  height: 500px;
+  margin-left: 40%;
+  margin-top: 3%;
+}
+
+#displayPhoto {
+  position: fixed;
+  height: 150px;
+  width: 150px;
+}
+
+#agreeButton {
+  position: fixed;
+  margin-top: 15%;
+} 

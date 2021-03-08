@@ -1,4 +1,14 @@
-<img src={{userService.userPictureURL}}>
-<p>
-  details-form works! {{userService.userDetails}}
-</p>
+<div id="imageScreen">
+  <img id="displayPhoto" src={{userService.userPictureURL}}>
+  <nav id="editLinks">
+    <a routerLink="/register" routerLinkActive="active">Edit photo</a><br/><br/>
+    <a routerLink="/register" routerLinkActive="active">Edit profile</a>
+  </nav>
+</div>
+
+<div class="vertical-line"></div>
+
+<div id="infoScreen">
+  <p>{{userService.userDetails}}</p>
+  <button id="agreeButton" mat-raised-button class="register-button" color="primary">Agree</button>
+</div>

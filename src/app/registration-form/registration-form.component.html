@@ -28,8 +28,7 @@
         <mat-error *ngIf="register_form.controls['lastName']?.invalid">{{printErrorMessage()}}</mat-error>
       </mat-form-field><br/>
 
-    Age <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="13" max="60" color="primary"
-        formControlName="age">
+    Age <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="13" max="60" color="primary">
       </mat-slider><br/>
       <mat-label id="ageBand">13-19 . 20-29 . 30-45 . 45 & Above</mat-label><br/>
 
