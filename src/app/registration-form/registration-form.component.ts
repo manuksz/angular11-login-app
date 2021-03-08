@@ -1,7 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
-import { FormControl, Validators, FormGroup, FormBuilder } from "@angular/forms";
+import {
+  FormControl,
+  Validators,
+  FormGroup,
+  FormBuilder
+} from "@angular/forms";
 import { Router } from "@angular/router";
-import { UserDetailsService } from '../user-details.service';
+import { UserDetailsService } from "../user-details.service";
 
 /*import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import {
@@ -19,23 +24,27 @@ import { map, startWith } from "rxjs/operators";*/
 })
 export class RegistrationFormComponent implements OnInit {
   register_form: FormGroup;
-  constructor(private router: Router, private formBuilder: FormBuilder, public userService: UserDetailsService) {}
-
+  isChecked: boolean = false;
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    public userService: UserDetailsService
+  ) {}
 
   ngOnInit() {
     this.register_form = this.formBuilder.group({
-    email: new FormControl("", [Validators.required, Validators.email]),
-    firstName: new FormControl("", [
-      Validators.required,
-      Validators.pattern("^[A-Za-z]{1,20}$")
-    ]),
-    lastName: new FormControl("", [Validators.required]),
-    stateName: new FormControl("", [Validators.required]),
-    countryName: new FormControl("", [Validators.required]),
-    mobileNumber: new FormControl("", [
-      Validators.required,
-      Validators.pattern("^[0-9]{10}$")
-    ])
+      email: new FormControl("", [Validators.required, Validators.email]),
+      firstName: new FormControl("", [
+        Validators.required,
+        Validators.pattern("^[A-Za-z]{1,20}$")
+      ]),
+      lastName: new FormControl("", [Validators.required]),
+      stateName: new FormControl("", [Validators.required]),
+      countryName: new FormControl("", [Validators.required]),
+      mobileNumber: new FormControl("", [
+        Validators.required,
+        Validators.pattern("^[0-9]{10}$")
+      ])
     });
   }
 
@@ -89,14 +98,42 @@ export class RegistrationFormComponent implements OnInit {
     }
   }
 
-    submitUser(pageName: string): void {
+  submitUser(pageName: string): void {
+    alert("" +    this.register_form.get('age').value);
+ 
+    
     if (this.register_form.valid) {
-      // You will get form value if your form is valid
-      alert("Valid");
-      this.userService.sendUserDetails("MANU");
+      // if the form data is valid
+      var userString =
+        "I am " +
+        this.register_form.controls["firstName"].value +
+        " " +
+        this.register_form.controls["lastName"].value +
+        " and I am above " +
+        "age" +
+        " years and you can send your emails to " +
+        this.register_form.controls["email"].value +
+        "I lives in the state of " +
+        "state" +
+        ". I like to " +
+        "hobbies";
+
+      // if subscribed for news letters
+      if (this.isChecked) {
+        userString += ". And please send me the news letters ";
+      }
+      userString +=
+        ". Please reach out to me on my phone " +
+        this.register_form.controls["mobileNumber"].value;
+      +".";
+      this.userService.sendUserDetails(userString);
       this.router.navigate([`${pageName}`]);
     }
   }
+
+testEvent(event) {
+alert(JSON.stringify(event)) //check the event object and get your required values.
+}
 
   /*
   visible = true;

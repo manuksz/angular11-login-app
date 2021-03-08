@@ -28,8 +28,10 @@
         <mat-error *ngIf="register_form.controls['lastName']?.invalid">{{printErrorMessage()}}</mat-error>
       </mat-form-field><br/>
 
-    Age <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="13" min="1" max="60" color="primary">
+    Age <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="13" max="60" color="primary"
+        formControlName="age">
       </mat-slider><br/>
+      <mat-label id="ageBand">13-19 . 20-29 . 30-45 . 45 & Above</mat-label><br/>
 
     Email <mat-form-field appearance="fill">
         <input matInput placeholder="email" formControlName="email" required>
@@ -67,7 +69,8 @@
         <input matInput placeholder="interests">
       </mat-form-field><br/>
 
-      <mat-checkbox class="example-margin" color="primary"> Subscribe to the news letter </mat-checkbox>
+      <mat-checkbox class="example-margin" color="primary" [ngModel]="isChecked" (change)="isChecked = !isChecked">
+        Subscribe to the news letter </mat-checkbox>
 
       <button mat-raised-button class="submit-button" color="primary"
   (click)="submitUser('detail')">Submit</button>

@@ -2,6 +2,10 @@ mat-slider {
   width: 220px;
 }
 
+#ageBand {
+  margin-left: 5%;
+}
+
 #imageUploader {
   position: fixed;
   height: 50px;
