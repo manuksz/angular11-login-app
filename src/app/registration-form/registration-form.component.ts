@@ -25,6 +25,7 @@ import { map, startWith } from "rxjs/operators";*/
 export class RegistrationFormComponent implements OnInit {
   register_form: FormGroup;
   isChecked: boolean = false;
+  imageURL = "";
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -86,7 +87,7 @@ export class RegistrationFormComponent implements OnInit {
         let image = new Image();
         image.src = e.target.result;
         image.onload = rs => {
-          let imgBase64Path = e.target.result;
+          this.imageURL = e.target.result; 
         };
       };
       reader.readAsDataURL(imgFile.target.files[0]);
@@ -99,10 +100,11 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   submitUser(pageName: string): void {
-    alert("" +    this.register_form.get('age').value);
+
+
  
     
-    if (this.register_form.valid) {
+    //if (this.register_form.valid) {
       // if the form data is valid
       var userString =
         "I am " +
@@ -127,13 +129,12 @@ export class RegistrationFormComponent implements OnInit {
         this.register_form.controls["mobileNumber"].value;
       +".";
       this.userService.sendUserDetails(userString);
+      this.userService.sendUserPicture(this.imageURL);
       this.router.navigate([`${pageName}`]);
-    }
+    //}
   }
 
-testEvent(event) {
-alert(JSON.stringify(event)) //check the event object and get your required values.
-}
+
 
   /*
   visible = true;
